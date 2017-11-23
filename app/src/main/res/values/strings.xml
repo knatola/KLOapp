@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">KLO app</string>
+    <string name="mainMenuBtn1">Play</string>
+    <string name="mainMenuBtn2">Hira info</string>
+    <string name="mainMenuBtn3">Kata info</string>
+    <string name="mainMenuBtn4">Exit</string>
+    <string name="action_help">Help</string>
+    <string name="action_symbols">Symbols</string>
+</resources>
