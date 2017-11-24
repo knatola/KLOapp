@@ -38,6 +38,8 @@ public class SymbolMenu extends AppCompatActivity{
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
+
+    //Custom fragment adapter
     public class FragmentsAdapter extends FragmentPagerAdapter{
 
         public FragmentsAdapter(FragmentManager fm){
