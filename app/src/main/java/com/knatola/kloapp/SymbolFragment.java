@@ -22,6 +22,7 @@ public class SymbolFragment extends android.support.v4.app.Fragment{
     private View rootView;
     ArrayList<Symbol> symbols;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

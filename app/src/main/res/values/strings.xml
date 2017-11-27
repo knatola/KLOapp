@@ -6,4 +6,9 @@
     <string name="mainMenuBtn4">Exit</string>
     <string name="action_help">Help</string>
     <string name="action_symbols">Symbols</string>
+    <string name="gameMenuBtn1">Hiragana game 1</string>
+    <string name="gameMenuBtn2">Hiragana game 2</string>
+    <string name="gameMenuBtn3">Katakana game 1</string>
+    <string name="gameMenuBtn4">Katakana game 2</string>
+
 </resources>
