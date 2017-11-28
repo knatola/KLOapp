@@ -15,6 +15,7 @@ import com.knatola.kloapp.R;
 
 public class GameTwoFragment extends Fragment {
 
+    private GameTwoLogic mGameTwoLogic;
     private static View rootView;
 
     @Nullable
@@ -22,6 +23,7 @@ public class GameTwoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView =  inflater.inflate(R.layout.game_two_layout, container, false);
 
+        mGameTwoLogic = GameTwoLogic.getInstance();
         Bundle args = getArguments();
 
         if (args != null) {

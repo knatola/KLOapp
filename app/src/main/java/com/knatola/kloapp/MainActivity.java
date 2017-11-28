@@ -3,14 +3,18 @@ package com.knatola.kloapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.knatola.kloapp.Game.GameActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG = "Main menu:";
     private Button mainMenuBtn1;
     private Button mainMenuBtn2;
     private Button mainMenuBtn3;
@@ -29,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         mainMenuBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //game menu intent here
+                Log.d(LOG,"button 1 pressed");
+                Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(gameIntent);//game menu intent here
             }
         });
 
@@ -67,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
