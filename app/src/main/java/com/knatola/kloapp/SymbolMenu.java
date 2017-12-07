@@ -65,6 +65,7 @@ public class SymbolMenu extends AppCompatActivity{
         public int getCount() {
             return 2;
         }
+
         @Override
         public CharSequence getPageTitle(int position){
 

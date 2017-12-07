@@ -42,14 +42,11 @@ public class Symbol implements Parcelable{
     public void readFromParcel(Parcel in) {
         name = in.readString();
         pic = in.readString();
-
-
     }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(pic);
-
     }
 
 
