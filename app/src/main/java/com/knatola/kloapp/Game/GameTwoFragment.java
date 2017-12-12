@@ -13,7 +13,7 @@ import com.knatola.kloapp.R;
  * Created by OMISTAJA on 24.11.2017.
  */
 
-public class GameTwoFragment extends Fragment {
+public class GameTwoFragment extends Fragment{
 
     private GameTwoLogic mGameTwoLogic;
     private static View rootView;

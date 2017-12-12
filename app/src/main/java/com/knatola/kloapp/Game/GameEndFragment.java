@@ -16,7 +16,8 @@ import com.knatola.kloapp.R;
 public class GameEndFragment extends android.support.v4.app.Fragment {
 
     private static View rootView;
-    private static int score = 0 ;
+    private static int mScore = 0;
+    private static int mQuestionCount;
 
     @Nullable
     @Override
@@ -26,8 +27,10 @@ public class GameEndFragment extends android.support.v4.app.Fragment {
         Bundle args = getArguments();
 
         if (args != null) {
-            score = args.getInt("score");
+            mScore = args.getInt("score");
+            mQuestionCount = args.getInt("questionCount");
         }
+
 
 
 

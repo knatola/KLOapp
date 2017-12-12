@@ -19,7 +19,10 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.knatola.kloapp.R;
+import com.knatola.kloapp.Symbol.Symbol;
 import com.knatola.kloapp.SymbolFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by knatola on 23.11.2017.
@@ -62,6 +65,14 @@ public class GameActivity extends FragmentActivity {
             }
         }
 
+        final Symbol symbol = new Symbol("ka","か" );
+        Symbol symbol1 = new Symbol("ki","き");
+        Symbol symbol2 = new Symbol("ku", "く");
+
+        final ArrayList<Symbol> symbols = new ArrayList<>();
+        symbols.add(symbol);
+        symbols.add(symbol1);
+        symbols.add(symbol2);
 
         mBtnLayout = findViewById(R.id.buttonLayout);
         //mFragmentAdapter = new FragmentsAdapter(getSupportFragmentManager());
@@ -83,7 +94,7 @@ public class GameActivity extends FragmentActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.gameFragmentContainer, gameOneFragment);
                 transaction.commit();*/
-                setGameFragments("hirakana", 1);
+                setGameFragments(symbols, 1);
                 mBtnLayout.setVisibility(View.GONE);
 
             }
@@ -91,30 +102,30 @@ public class GameActivity extends FragmentActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGameFragments("hirakana", 2);
+                setGameFragments(symbols, 2);
                 mBtnLayout.setVisibility(View.GONE);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGameFragments("katakana", 1);
+                //setGameFragments("katakana", 1);
                 mBtnLayout.setVisibility(View.GONE);
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGameFragments("katakana", 2);
+                //setGameFragments("katakana", 2);
                 mBtnLayout.setVisibility(View.GONE);
             }
         });
     }
     //Helper method to dynamically return gameFragment objects
-    public void setGameFragments(String symbol, int gameType){
+    public void setGameFragments(ArrayList<Symbol> gameSymbols, int gameType){
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        mGameBundle.putString("gameType", symbol);
+        mGameBundle.putParcelableArrayList("gameSymbols", gameSymbols);
 
         if(gameType == 1){
             GameOneFragment gameOneFragment = new GameOneFragment();
