@@ -10,5 +10,8 @@
     <string name="gameMenuBtn2">Hiragana game 2</string>
     <string name="gameMenuBtn3">Katakana game 1</string>
     <string name="gameMenuBtn4">Katakana game 2</string>
+    <string name="endPoints">Your points:</string>
+    <string name="gameMenu">Game Menu</string>
+    <string name="mainMenu">Main Menu</string>
 
 </resources>

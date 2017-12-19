@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class GameOneFragment extends Fragment{
 
+    private static final String LOG = "GameOneFragment:";
     private static View rootView;
     private ArrayList<Symbol> mGameSymbols;
     private Button mOkBtn;
@@ -44,43 +46,51 @@ public class GameOneFragment extends Fragment{
         if (args != null) {
             mGameSymbols = args.getParcelableArrayList("gameSymbols");
             mMaxQuestionCount = mGameSymbols.size();
+            Log.d(LOG, "questions: "+ mMaxQuestionCount);
         }
-        mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
 
+        mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
         mOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mInput.getText().toString().equals("")){
                     Snackbar noInput = Snackbar.make(rootView.findViewById(R.id.gameOneBase), "Write your answer.", Snackbar.LENGTH_SHORT);
                     noInput.show();
-                }
-
-                else if(!mInput.getText().toString().equals(mGameSymbols.get(mQuestionCount).getName())) {
+                } else if(!mInput.getText().toString().equals(mGameSymbols.get(mQuestionCount).getName())) {
                     Snackbar wrongAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Wrong answer.", Snackbar.LENGTH_LONG);
                     wrongAnswer.show();
-                    if(mQuestionCount + 1 <= mMaxQuestionCount){
+                    mInput.setText("");
+
+                    if(mQuestionCount + 1 < mMaxQuestionCount){
                         mQuestionCount++;
                         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
                     }else{
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        Log.d(LOG,"tying to start endGameFragment");
+                        moveToGameEnd();
                     }
-
-                }
-                else {
+                } else {
                     Snackbar rightAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Right answer!", Snackbar.LENGTH_LONG);
                     rightAnswer.show();
-                    if(mQuestionCount + 1 <= mMaxQuestionCount ) {
+                    if(mQuestionCount + 1 < mMaxQuestionCount ) {
                         mQuestionCount++;
                         mPointCount++;
                         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
                     }else{
-                        //End game screen here with bundle point/questions.
+                        moveToGameEnd();
                     }
-
                 }
             }
         });
 
         return rootView;
+    }
+    public void moveToGameEnd(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("score", mPointCount);
+        GameEndFragment endFragment = new GameEndFragment();
+        endFragment.setArguments(bundle);
+        transaction.replace(R.id.gameFragmentContainer, endFragment, "endFragment");
+        transaction.commit();
     }
 }

@@ -2,12 +2,21 @@ package com.knatola.kloapp.Game;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.knatola.kloapp.R;
+import com.knatola.kloapp.Symbol.Symbol;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by OMISTAJA on 24.11.2017.
@@ -17,20 +26,141 @@ public class GameTwoFragment extends Fragment{
 
     private GameTwoLogic mGameTwoLogic;
     private static View rootView;
+    private ArrayList<Symbol> mGameSymbols;
+    private Button mButton1;
+    private Button mButton2;
+    private Button mButton3;
+    private Button mButton4;
+    Random rng = new Random();
+    private TextView mQuestionPic;
+    private String mQuestion;
+    private int mScoreCount = 0;
+    private int mQuestionCount;
+    private int mMaxQuestionCount;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView =  inflater.inflate(R.layout.game_two_layout, container, false);
+        mButton1 = rootView.findViewById(R.id.answerBtn1);
+        mButton2 = rootView.findViewById(R.id.answerBtn2);
+        mButton3 = rootView.findViewById(R.id.answerBtn3);
+        mButton4 = rootView.findViewById(R.id.answerBtn4);
+        mQuestionPic = rootView.findViewById(R.id.questionImage);
 
         mGameTwoLogic = GameTwoLogic.getInstance();
         Bundle args = getArguments();
 
         if (args != null) {
-
+            mGameSymbols = args.getParcelableArrayList("gameSymbols");
+            mQuestion = randomSymbolText(mGameSymbols);
+            mMaxQuestionCount = mGameSymbols.size();
         }
+        //set the asked picture and set button pictures
+        mQuestionPic.setText(mQuestion);
+        changeQuestions(mQuestion);
+
+        mButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testRightButton(mButton1);
+            }
+        });
+
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testRightButton(mButton2);
+            }
+        });
+        mButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testRightButton(mButton3);
+            }
+        });
+
+        mButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testRightButton(mButton4);
+            }
+        });
 
 
         return rootView;
+    }
+
+    //method to change the questions, maybe this could be made more efficiently (?)
+    public void changeQuestions(String answer){
+        int i = rng.nextInt(4);
+        switch(i){
+            case 1:
+                mButton1.setText(answer);
+                mButton2.setText(randomSymbolText(mGameSymbols));
+                mButton3.setText(randomSymbolText(mGameSymbols));
+                mButton4.setText(randomSymbolText(mGameSymbols));
+                break;
+
+            case 2:
+                mButton2.setText(answer);
+                mButton1.setText(randomSymbolText(mGameSymbols));
+                mButton3.setText(randomSymbolText(mGameSymbols));
+                mButton4.setText(randomSymbolText(mGameSymbols));
+                break;
+
+            case 3:
+                mButton3.setText(answer);
+                mButton2.setText(randomSymbolText(mGameSymbols));
+                mButton1.setText(randomSymbolText(mGameSymbols));
+                mButton4.setText(randomSymbolText(mGameSymbols));
+                break;
+
+            case 4:
+                mButton4.setText(answer);
+                mButton2.setText(randomSymbolText(mGameSymbols));
+                mButton3.setText(randomSymbolText(mGameSymbols));
+                mButton1.setText(randomSymbolText(mGameSymbols));
+                break;
+        }
+    }
+
+    public String randomSymbolText(ArrayList<Symbol> symbols){
+
+        int i = rng.nextInt(symbols.size());
+        Symbol symbol = symbols.get(i);
+        return symbol.getPic();
+    }
+    public void testRightButton(Button btn){
+        if(btn.getText().toString().equals(mQuestion)){
+            if(mQuestionCount + 1 < mMaxQuestionCount){
+                mScoreCount++;
+                mQuestionCount++;
+                changeQuestions(randomSymbolText(mGameSymbols));
+            } else{
+                moveToGameEnd();
+            }
+        }else{
+            Snackbar wrongAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Wrong answer.", Snackbar.LENGTH_LONG);
+            wrongAnswer.show();
+            if(mQuestionCount + 1 < mMaxQuestionCount){
+                mScoreCount++;
+                mQuestionCount++;
+                changeQuestions(randomSymbolText(mGameSymbols));
+            } else {
+                moveToGameEnd();
+            }
+        }
+    }
+
+    public void moveToGameEnd(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putInt("score", mScoreCount);
+        GameEndFragment endFragment = new GameEndFragment();
+        endFragment.setArguments(bundle);
+        transaction.replace(R.id.gameFragmentContainer, endFragment, "endFragment");
+        transaction.commit();
+        getFragmentManager().beginTransaction().remove(GameTwoFragment.this).commit();
     }
 }

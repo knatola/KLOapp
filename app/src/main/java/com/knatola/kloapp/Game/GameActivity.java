@@ -68,6 +68,7 @@ public class GameActivity extends FragmentActivity {
         final Symbol symbol = new Symbol("ka","か" );
         Symbol symbol1 = new Symbol("ki","き");
         Symbol symbol2 = new Symbol("ku", "く");
+        //Symbol symbol3 = new Symbol("")
 
         final ArrayList<Symbol> symbols = new ArrayList<>();
         symbols.add(symbol);
@@ -95,7 +96,7 @@ public class GameActivity extends FragmentActivity {
                 transaction.replace(R.id.gameFragmentContainer, gameOneFragment);
                 transaction.commit();*/
                 setGameFragments(symbols, 1);
-                mBtnLayout.setVisibility(View.GONE);
+                setBtnLayout(0);
 
             }
         });
@@ -103,21 +104,21 @@ public class GameActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 setGameFragments(symbols, 2);
-                mBtnLayout.setVisibility(View.GONE);
+                setBtnLayout(0);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //setGameFragments("katakana", 1);
-                mBtnLayout.setVisibility(View.GONE);
+                setBtnLayout(0);
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //setGameFragments("katakana", 2);
-                mBtnLayout.setVisibility(View.GONE);
+                setBtnLayout(0);
             }
         });
     }
@@ -138,6 +139,13 @@ public class GameActivity extends FragmentActivity {
         }
 
         transaction.commit();
+    }
+    public void setBtnLayout(int i){
+        if(i == 1){
+            mBtnLayout.setVisibility(View.VISIBLE);
+        }else{
+            mBtnLayout.setVisibility(View.GONE);
+        }
     }
 
     /*public static class FragmentsAdapter extends FragmentPagerAdapter {
