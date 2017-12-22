@@ -11,17 +11,19 @@
         android:id="@+id/questionImage" />
 
     <TextView
+        android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="question: 1/10"
+        android:text=""
         android:layout_alignStart="@+id/fakeView"
         android:layout_marginStart="@dimen/fab_margin"
         android:layout_above="@+id/answerBtnLayout"/>
 
     <TextView
+        android:id="@+id/questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="points: 1/10"
+        android:text=""
         android:layout_alignEnd="@+id/fakeView"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_above="@+id/answerBtnLayout" />
@@ -32,6 +34,7 @@
         android:layout_centerInParent="true"/>
 
     <LinearLayout
+        android:layout_marginBottom="@dimen/snackbar_margin"
         android:id="@+id/answerBtnLayout"
         android:layout_width="match_parent"
         android:orientation="vertical"

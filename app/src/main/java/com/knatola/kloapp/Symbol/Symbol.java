@@ -13,7 +13,7 @@ public class Symbol implements Parcelable{
     private String name;
     private Image image;
     private String pic; //pic = tavu japanilaisittain.
-
+ 
     public Symbol(String name, String pic){
         this.name = name;
         this.pic = pic;

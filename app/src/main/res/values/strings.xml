@@ -13,5 +13,7 @@
     <string name="endPoints">Your points:</string>
     <string name="gameMenu">Game Menu</string>
     <string name="mainMenu">Main Menu</string>
+    <string name="points">points:</string>
+    <string name="question">question:</string>
 
 </resources>

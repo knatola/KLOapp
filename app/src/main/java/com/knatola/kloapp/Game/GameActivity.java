@@ -68,12 +68,25 @@ public class GameActivity extends FragmentActivity {
         final Symbol symbol = new Symbol("ka","か" );
         Symbol symbol1 = new Symbol("ki","き");
         Symbol symbol2 = new Symbol("ku", "く");
-        //Symbol symbol3 = new Symbol("")
+        Symbol symbol3 = new Symbol("ko", "ko");
+        Symbol symbol4 = new Symbol("ke", "ke");
+        Symbol symbol5 = new Symbol("kon", "kon");
+        Symbol symbol6 = new Symbol("koo", "koo");
+        Symbol symbol7 = new Symbol("kone", "kone");
+        Symbol symbol8 = new Symbol("koe", "koe");
+        Symbol symbol9 = new Symbol("kog", "kog");
 
         final ArrayList<Symbol> symbols = new ArrayList<>();
         symbols.add(symbol);
         symbols.add(symbol1);
         symbols.add(symbol2);
+        symbols.add(symbol3);
+        symbols.add(symbol4);
+        symbols.add(symbol5);
+        symbols.add(symbol6);
+        symbols.add(symbol7);
+        symbols.add(symbol8);
+        symbols.add(symbol9);
 
         mBtnLayout = findViewById(R.id.buttonLayout);
         //mFragmentAdapter = new FragmentsAdapter(getSupportFragmentManager());
