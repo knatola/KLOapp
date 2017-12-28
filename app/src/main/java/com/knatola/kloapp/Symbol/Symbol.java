@@ -13,10 +13,16 @@ public class Symbol implements Parcelable{
     private String name;
     private Image image;
     private String pic; //pic = tavu japanilaisittain.
- 
+    private String picAddress;
+
     public Symbol(String name, String pic){
         this.name = name;
         this.pic = pic;
+    }
+    public Symbol(String name, String pic, String picAddress){
+        this.name = name;
+        this.pic = pic;
+        this.picAddress = picAddress;
     }
 
     public static final Parcelable.Creator<Symbol> CREATOR = new Parcelable.Creator<Symbol>() {

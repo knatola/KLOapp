@@ -1,5 +1,6 @@
 package com.knatola.kloapp.Game;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -14,8 +15,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.knatola.kloapp.R;
@@ -50,6 +53,9 @@ public class GameActivity extends FragmentActivity {
     private static final String LOG = "Game Menu Activity:";
     private String mGameType;
     private Bundle mGameBundle;
+    private ImageButton mBackBtn;
+    private ArrayList<Symbol> mSymbolsList;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,16 +63,22 @@ public class GameActivity extends FragmentActivity {
         Log.d(LOG, "Activity started");
         setContentView(R.layout.game_menu_layout);
 
-        mGameBundle = new Bundle();
+        mGameBundle = getIntent().getExtras();
+        if(mGameBundle.getParcelableArrayList("symbols") != null)
+            mSymbolsList = mGameBundle.getParcelableArrayList("symbols");
 
-        if(findViewById(R.id.gameFragmentContainer) != null){
-            if(savedInstanceState != null){
+
+
+        if (findViewById(R.id.gameFragmentContainer) != null) {
+            if (savedInstanceState != null) {
                 return;
             }
         }
 
-        final Symbol symbol = new Symbol("ka","か" );
-        Symbol symbol1 = new Symbol("ki","き");
+        mBackBtn = findViewById(R.id.gameMenuBack);
+
+        final Symbol symbol = new Symbol("ka", "か");
+        Symbol symbol1 = new Symbol("ki", "き");
         Symbol symbol2 = new Symbol("ku", "く");
         Symbol symbol3 = new Symbol("ko", "ko");
         Symbol symbol4 = new Symbol("ke", "ke");
@@ -108,7 +120,7 @@ public class GameActivity extends FragmentActivity {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.gameFragmentContainer, gameOneFragment);
                 transaction.commit();*/
-                setGameFragments(symbols, 1);
+                setGameFragments(mSymbolsList, 1);
                 setBtnLayout(0);
 
             }
@@ -116,25 +128,34 @@ public class GameActivity extends FragmentActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setGameFragments(symbols, 2);
+                setGameFragments(mSymbolsList, 2);
                 setBtnLayout(0);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //setGameFragments("katakana", 1);
+                setGameFragments(mSymbolsList, 1);
                 setBtnLayout(0);
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //setGameFragments("katakana", 2);
+                setGameFragments(mSymbolsList, 2);
                 setBtnLayout(0);
             }
         });
+
+        mBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
     }
+
     //Helper method to dynamically return gameFragment objects
     public void setGameFragments(ArrayList<Symbol> gameSymbols, int gameType){
 
@@ -161,6 +182,19 @@ public class GameActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        for(Fragment fragment:getSupportFragmentManager().getFragments()){
+
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+
+        if(mBtnLayout.getVisibility()== View.VISIBLE)
+            super.onBackPressed();
+
+        setBtnLayout(1);
+    }
     /*public static class FragmentsAdapter extends FragmentPagerAdapter {
 
         public FragmentsAdapter(FragmentManager fm){

@@ -1,5 +1,7 @@
 package com.knatola.kloapp.Game;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -9,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,6 +57,9 @@ public class GameOneFragment extends Fragment{
         mOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mInput.clearFocus();
+                hideKeyboard(getContext());
+
                 if(mInput.getText().toString().equals("")){
                     Snackbar noInput = Snackbar.make(rootView.findViewById(R.id.gameOneBase), "Write your answer.", Snackbar.LENGTH_SHORT);
                     noInput.show();
@@ -79,11 +86,22 @@ public class GameOneFragment extends Fragment{
                         moveToGameEnd();
                     }
                 }
+
+
+
             }
         });
 
         return rootView;
     }
+
+    public static void hideKeyboard(Context mContext) {
+        InputMethodManager imm = (InputMethodManager) mContext
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(((Activity) mContext).getWindow()
+                .getCurrentFocus().getWindowToken(), 0);
+    }
+
     public void moveToGameEnd(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();

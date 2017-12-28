@@ -15,5 +15,6 @@
     <string name="mainMenu">Main Menu</string>
     <string name="points">points:</string>
     <string name="question">question:</string>
+    <string name="tapPicture">Tap the picture</string>
 
 </resources>

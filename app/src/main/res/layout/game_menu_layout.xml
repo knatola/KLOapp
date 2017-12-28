@@ -35,7 +35,17 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:backgroundTint="@color/colorPrimary">
 
+            <ImageButton
+                android:id="@+id/gameMenuBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/back_white" />
+
         </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
 
 
@@ -50,28 +60,28 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="100dp"
-            android:text="@string/gameMenuBtn1"/>
+            android:text="@string/gameMenuBtn1" />
 
         <Button
             android:id="@+id/game2Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/game1Btn"
-            android:text="@string/gameMenuBtn2"/>
+            android:text="@string/gameMenuBtn2" />
 
         <Button
             android:id="@+id/game3Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/game2Btn"
-            android:text="@string/gameMenuBtn3"/>
+            android:text="@string/gameMenuBtn3" />
 
         <Button
             android:id="@+id/game4Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/game3Btn"
-            android:text="@string/gameMenuBtn4"/>
+            android:text="@string/gameMenuBtn4" />
 
     </RelativeLayout>
 

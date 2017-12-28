@@ -22,10 +22,21 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:backgroundTint="@color/colorPrimary">
 
+            <ImageButton
+                android:id="@+id/gameBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:src="@drawable/back_white" />
+
         </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
 
     <TextView
+        android:textSize="250sp"
         android:id="@+id/symbolImage"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -33,12 +44,13 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
+        android:layout_marginBottom="@dimen/snackbar_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/screenBottom"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
+
         <LinearLayout
             android:id="@+id/apuLinear"
             android:layout_width="match_parent"

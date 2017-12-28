@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:backgroundTint="@color/colorPrimary">
+
+            <ImageButton
+                android:id="@+id/symbolInfoBack"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/back_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/symbolImgBtn"
+        android:id="@+id/tapPicTxt"
+        android:text="@string/tapPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/symbolImgBtn"
+        android:src="@drawable/ka21"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginStart="90dp"
+        android:textSize="70sp"
+        android:layout_below="@+id/symbolImgBtn"
+        android:id="@+id/symbolNameTxt"
+        android:text="ka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_toRightOf="@+id/symbolNameTxt"
+        android:layout_marginStart="50dp"
+        android:textSize="70sp"
+        android:layout_below="@+id/symbolImgBtn"
+        android:id="@+id/symbolTavuTxt"
+        android:text="か"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

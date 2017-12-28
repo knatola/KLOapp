@@ -17,6 +17,7 @@ import com.knatola.kloapp.Symbol.Symbol;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -28,7 +29,6 @@ import java.util.Set;
 public class GameTwoFragment extends Fragment{
 
     private static final String LOG = "GameTwoFragment:";
-    private GameTwoLogic mGameTwoLogic;
     private static View rootView;
     private ArrayList<Symbol> mGameSymbols;
     private Button mButton1;
@@ -37,9 +37,9 @@ public class GameTwoFragment extends Fragment{
     private Button mButton4;
     Random rng = new Random();
     private TextView mQuestionPic;
-    private String mQuestion;
+    private Symbol mQuestion;
     private int mScoreCount = 0;
-    private int mQuestionCount;
+    private int mQuestionCount = 1;
     private int mMaxQuestionCount;
     private TextView mPointView;
     private TextView mQuestionView;
@@ -56,21 +56,24 @@ public class GameTwoFragment extends Fragment{
         mPointView = rootView.findViewById(R.id.points);
         mQuestionView = rootView.findViewById(R.id.questions);
 
-        mGameTwoLogic = GameTwoLogic.getInstance();
+
         Bundle args = getArguments();
 
         if (args != null) {
             mGameSymbols = args.getParcelableArrayList("gameSymbols");
-            setmQuestion(randomSymbolText(mGameSymbols));
+            Collections.shuffle(mGameSymbols);
+            //mQuestion = randomSymbolAnswer(mGameSymbols);
+            // mQuestion.setPic(randomSymbolAnswer(mGameSymbols).getPic());
+            mQuestion = mGameSymbols.get(mQuestionCount - 1);
             mMaxQuestionCount = mGameSymbols.size();
         }
         //set the asked picture and set button pictures
-        mQuestionPic.setText(mQuestion);
+        mQuestionPic.setText(mQuestion.getPic());
         changeQuestions(mQuestion);
         mPointView.setText("Points: " + Integer.toString(mScoreCount));
         mQuestionView.setText("Questions: " + Integer.toString(mQuestionCount));
 
-        Set<Symbol> testList = randomSymbolTexts(mGameSymbols);
+        //String testList = randomSymbolTexts(mGameSymbols, randomSymbolText(mGameSymbols));
 
         mButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,79 +106,100 @@ public class GameTwoFragment extends Fragment{
     }
 
     //method to change the questions, maybe this could be made more efficiently (?)
-    public void changeQuestions(String answer){
+    public void changeQuestions(Symbol symbol){
+        String answerPic = symbol.getPic();
+        String answerTavu = symbol.getName();
         int i = rng.nextInt(3);
+        String [] apuLista = randomSymbolTexts(mGameSymbols, answerTavu);
         Log.d(LOG, "the right case is " + i);
-        mQuestionPic.setText(answer.toLowerCase());
+        mQuestionPic.setText(answerPic.toLowerCase());
+
         switch(i){
             case 0:
-                mButton1.setText(answer);
-                mButton2.setText(randomSymbolText(mGameSymbols));
-                mButton3.setText(randomSymbolText(mGameSymbols));
-                mButton4.setText(randomSymbolText(mGameSymbols));
+                mButton1.setText(answerTavu);
+                mButton2.setText(apuLista[1]);
+                mButton3.setText(apuLista[2]);
+                mButton4.setText(apuLista[3]);
                 break;
 
             case 1:
-                mButton2.setText(answer);
-                mButton1.setText(randomSymbolText(mGameSymbols));
-                mButton3.setText(randomSymbolText(mGameSymbols));
-                mButton4.setText(randomSymbolText(mGameSymbols));
+                mButton2.setText(answerTavu);
+                mButton1.setText(apuLista[1]);
+                mButton3.setText(apuLista[2]);
+                mButton4.setText(apuLista[3]);
                 break;
 
             case 2:
-                mButton3.setText(answer);
-                mButton2.setText(randomSymbolText(mGameSymbols));
-                mButton1.setText(randomSymbolText(mGameSymbols));
-                mButton4.setText(randomSymbolText(mGameSymbols));
+                mButton3.setText(answerTavu);
+                mButton2.setText(apuLista[1]);
+                mButton1.setText(apuLista[2]);
+                mButton4.setText(apuLista[3]);
                 break;
 
             case 3:
-                mButton4.setText(answer);
-                mButton2.setText(randomSymbolText(mGameSymbols));
-                mButton3.setText(randomSymbolText(mGameSymbols));
-                mButton1.setText(randomSymbolText(mGameSymbols));
+                mButton4.setText(answerTavu);
+                mButton2.setText(apuLista[1]);
+                mButton3.setText(apuLista[2]);
+                mButton1.setText(apuLista[3]);
                 break;
         }
     }
 
-    public Set<Symbol> randomSymbolTexts(ArrayList<Symbol> symbols){
+    /*
+    *maybe not optimal, but it works.
+    * Returns 3 random "wrong answers", with 1 right answer
+     */
+    public String [] randomSymbolTexts(ArrayList<Symbol> symbols, String answer){
 
-        int i = rng.nextInt(symbols.size());
-        Set<Symbol> apuLista = new HashSet<>();
-        for(int j  = 0 ; j < 4; j++) {
-            Symbol symbol = symbols.get(i);
-            if (apuLista.contains(symbol)) {
-                if(i == symbols.size()){
-                    Symbol symbol1 = symbols.get(i-1);
-                    apuLista.add(symbol1);
-                }else if( i < symbols.size()){
-                    Symbol symbol2 = symbols.get(i+1);
-                    apuLista.add(symbol2);
-                }
-            } else {
-                apuLista.add(symbol);
+            String[] apu = new String[4];
+            apu[0] = answer;
+
+            apu[1] = randomSymbolText(symbols);
+
+            while (apu[1].equals(answer)) {
+                apu[1] = randomSymbolText(symbols);
             }
-            for(Symbol r: apuLista){
-                Log.d(LOG, r.getPic());
+            apu[2] = randomSymbolText(symbols);
+
+            while (apu[2].equals(answer) || apu[2].equals(apu[1])) {
+                apu[2] = randomSymbolText(symbols);
             }
-        }
-        return apuLista;
+
+            apu[3] = randomSymbolText(symbols);
+            while (apu[3].equals(answer) || apu[3].equals(apu[1]) || apu[3].equals(apu[2])) {
+                apu[3] = randomSymbolText(symbols);
+            }
+            //test loop
+            for (int i = 0; i < 4; i++) {
+                Log.d(LOG, apu[i]);
+            }
+
+            return apu;
     }
+
     public String randomSymbolText(ArrayList<Symbol> symbols){
         int i = rng.nextInt(symbols.size());
         Symbol symbol = symbols.get(i);
 
-        return symbol.getPic();
+        return symbol.getName();
+    }
+
+    public Symbol randomSymbolAnswer(ArrayList<Symbol> symbols){
+
+        Symbol symbol = symbols.get(mQuestionCount - 1);
+
+        return symbol;
     }
 
     public void testRightButton(Button btn){
-        if(btn.getText().toString().equals(mQuestion)){
-            if(mQuestionCount + 1 < mMaxQuestionCount){
+        if(btn.getText().toString().equals(mQuestion.getName())){
+            if(mQuestionCount < mMaxQuestionCount){
                 mScoreCount++;
                 mQuestionCount++;
                 mPointView.setText("Points: " + Integer.toString(mScoreCount));
                 mQuestionView.setText("Question: " + Integer.toString(mQuestionCount));
-                setmQuestion(randomSymbolText(mGameSymbols));
+                //mQuestion.setPic(randomSymbolAnswer(mGameSymbols).getPic());
+                setmQuestion(randomSymbolAnswer(mGameSymbols));
                 changeQuestions(getmQuestion());
             } else{
                 mScoreCount++;
@@ -184,11 +208,11 @@ public class GameTwoFragment extends Fragment{
         }else{
             Snackbar wrongAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Wrong answer.", Snackbar.LENGTH_LONG);
             wrongAnswer.show();
-            if(mQuestionCount + 1 < mMaxQuestionCount){
+            if(mQuestionCount  < mMaxQuestionCount){
                 mQuestionCount++;
                 mPointView.setText("Points: "+ Integer.toString(mScoreCount));
                 mQuestionView.setText("Question: " + Integer.toString(mQuestionCount));
-                setmQuestion(randomSymbolText(mGameSymbols));
+                setmQuestion(randomSymbolAnswer(mGameSymbols));
                 changeQuestions(getmQuestion());
             } else {
                 moveToGameEnd();
@@ -207,11 +231,11 @@ public class GameTwoFragment extends Fragment{
         getFragmentManager().beginTransaction().remove(GameTwoFragment.this).commit();
     }
 
-    public String getmQuestion() {
+    public Symbol getmQuestion() {
         return mQuestion;
     }
 
-    public void setmQuestion(String mQuestion) {
+    public void setmQuestion(Symbol mQuestion) {
         this.mQuestion = mQuestion;
     }
 }
