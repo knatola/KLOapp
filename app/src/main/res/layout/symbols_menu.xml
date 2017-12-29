@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/backGroundMain"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -40,6 +41,17 @@
                     android:scaleX="1.5"
                     android:scaleY="1.5"
                     android:src="@drawable/back_white" />
+
+                <TextView
+                    android:fontFamily="@font/font_jap"
+                    android:id="@+id/symbolMenuHeader"
+                    android:layout_marginStart="40dp"
+                    android:layout_width="wrap_content"
+                    android:text="@string/symbols_header"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="#fdfefe"
+                    android:layout_height="wrap_content" />
 
             </android.support.v7.widget.Toolbar>
 

@@ -39,6 +39,7 @@ public class SymbolInfoActivity extends AppCompatActivity {
         mSymbolName.setText(mSymbol.getName());
         mSymbolTavu.setText(mSymbol.getPic());
 
+        //Stupid hard coded example
         switch(mSymbol.getName()){
             case "ka":
                 mImgBtn.setImageResource(R.drawable.ka21);
@@ -58,22 +59,10 @@ public class SymbolInfoActivity extends AppCompatActivity {
 
         }
 
-
         mImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 changePic(mSymbol);
-              /*  if(mCounter == 0){
-                    mImgBtn.setImageResource(R.drawable.ka22);
-                    mCounter ++;
-                }else if (mCounter == 1){
-                    mImgBtn.setImageResource(R.drawable.ka23);
-                    mCounter ++;
-                }else{
-                    mImgBtn.setImageResource(R.drawable.ka21);
-                    mCounter = 0;
-                }*/
             }
         });
 
@@ -85,6 +74,7 @@ public class SymbolInfoActivity extends AppCompatActivity {
         });
     }
 
+    //Stupid method to change pic, just for example reasons
     public void changePic(Symbol symbol){
         String symbolName = symbol.getName();
 
@@ -138,6 +128,5 @@ public class SymbolInfoActivity extends AppCompatActivity {
                     mCounter = 0;
                 }break;
         }
-
     }
 }

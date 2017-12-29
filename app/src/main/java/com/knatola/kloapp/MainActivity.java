@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar mToolbar;
     private ArrayList<Symbol> mHiraSymbols;
     private ArrayList<Symbol> mHiraSymbols2;
+    private static final String KATAKANA = "Katakana";
+    private static final String HIRAKANA = "Hiragana";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
         mHiraSymbols2.add(symbol7);
         mHiraSymbols2.add(symbol8);
         mHiraSymbols2.add(symbol9);
+
         mainMenuBtn1 = findViewById(R.id.mainMenuBtn1);
         mainMenuBtn2 = findViewById(R.id.mainMenuBtn2);
         mainMenuBtn3 = findViewById(R.id.mainMenuBtn3);
         mainMenuBtn4 = findViewById(R.id.mainMenuBtn4);
 
         mToolbar = findViewById(R.id.toolbar);
+        mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 
         mainMenuBtn1.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(LOG,"button 1 pressed");
                 Intent gameIntent = new Intent(MainActivity.this, GameActivity.class);
-                mHiraSymbols.addAll(mHiraSymbols2);
+                //mHiraSymbols.addAll(mHiraSymbols2);
                 gameIntent.putParcelableArrayListExtra("symbols", mHiraSymbols);
+                gameIntent.putParcelableArrayListExtra("symbols1", mHiraSymbols2);
                 startActivity(gameIntent);//game menu intent here
             }
         });
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent hiraIntent = new Intent(MainActivity.this, SymbolMenu.class);
                 hiraIntent.putParcelableArrayListExtra("symbols", mHiraSymbols);
                 hiraIntent.putParcelableArrayListExtra("symbols1", mHiraSymbols2);
+                hiraIntent.putExtra("type", HIRAKANA);
                 startActivity(hiraIntent);
             }
         });
@@ -89,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent kataIntent = new Intent(MainActivity.this, SymbolMenu.class);
                 kataIntent.putParcelableArrayListExtra("symbols", mHiraSymbols);
+                kataIntent.putParcelableArrayListExtra("symbols1", mHiraSymbols2);
+                kataIntent.putExtra("type", KATAKANA);
                 startActivity(kataIntent);
             }
         });
@@ -107,24 +115,33 @@ public class MainActivity extends AppCompatActivity {
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem help =  menu.findItem(R.id.action_help);
-        MenuItem symbols = menu.findItem(R.id.action_symbols);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id ==R.id.action_symbols){
+
+        //Check the button pressed and start intent
+        if(id == R.id.action_symbols_hirakana){
             Intent symbolIntent = new Intent(MainActivity.this, SymbolMenu.class);
+            symbolIntent.putParcelableArrayListExtra("symbols", mHiraSymbols);
+            symbolIntent.putParcelableArrayListExtra("symbols1", mHiraSymbols2);
+            symbolIntent.putExtra("type", HIRAKANA);
             startActivity(symbolIntent);
-        }else{
+        }else if(id == R.id.action_help){
             Intent helpIntent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(helpIntent);
+        }else{
+            Intent symbolIntent = new Intent(MainActivity.this, SymbolMenu.class);
+            symbolIntent.putParcelableArrayListExtra("symbols", mHiraSymbols);
+            symbolIntent.putParcelableArrayListExtra("symbols1", mHiraSymbols2);
+            symbolIntent.putExtra("type", KATAKANA);
+            startActivity(symbolIntent);
         }
         return super.onOptionsItemSelected(item);
     }

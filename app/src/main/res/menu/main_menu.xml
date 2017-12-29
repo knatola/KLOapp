@@ -9,7 +9,13 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/action_symbols"
-        android:title="@string/action_symbols"
+        android:id="@+id/action_symbols_katakana"
+        android:title="@string/action_symbols_katakana"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_symbols_hirakana"
+        android:title="@string/action_symbols_hirakana"
+        app:showAsAction="never"/>
+
 </menu>

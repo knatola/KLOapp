@@ -1,20 +1,24 @@
 <resources>
     <string name="app_name">KLO app</string>
     <string name="mainMenuBtn1">Play</string>
-    <string name="mainMenuBtn2">Hira info</string>
-    <string name="mainMenuBtn3">Kata info</string>
+    <string name="mainMenuBtn2">Symbols Hiragana</string>
+    <string name="mainMenuBtn3">Symbols Katakana</string>
     <string name="mainMenuBtn4">Exit</string>
     <string name="action_help">Help</string>
-    <string name="action_symbols">Symbols</string>
+    <string name="action_symbols_hirakana">Hiragana Symbols</string>
+    <string name="action_symbols_katakana">Katakana Symbols</string>
     <string name="gameMenuBtn1">Hiragana game 1</string>
     <string name="gameMenuBtn2">Hiragana game 2</string>
     <string name="gameMenuBtn3">Katakana game 1</string>
     <string name="gameMenuBtn4">Katakana game 2</string>
     <string name="endPoints">Your points:</string>
     <string name="gameMenu">Game Menu</string>
-    <string name="mainMenu">Main Menu</string>
+    <string name="mainMenu">Hira &amp; Kata 学</string>
     <string name="points">points:</string>
     <string name="question">question:</string>
     <string name="tapPicture">Tap the picture</string>
+    <string name="symbols_header">Symbols</string>
+    <string name="symbols_info_header">Symbol info</string>
+
 
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backGroundMain"
     tools:context="com.knatola.kloapp.MainActivity"
     android:id="@+id/mainActivityRelative">
 
@@ -24,6 +25,16 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:backgroundTint="@color/colorPrimary">
 
+            <TextView
+                android:fontFamily="@font/font_jap"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/whiteMain"
+                android:textAlignment="center"
+                android:text="@string/mainMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -34,14 +45,24 @@
         android:layout_centerInParent="true"/>
 
     <Button
-        android:background="@color/colorPrimary"
+        android:fontFamily="@font/font_jap"
+        android:textSize="30sp"
+        android:background="@drawable/button_basic"
         android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_height="80dp"
         android:text="@string/mainMenuBtn1"
         android:id="@+id/mainMenuBtn1"
         android:layout_marginTop="100dp"/>
 
     <Button
+        android:fontFamily="@font/font_jap"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_basic"
         android:id="@+id/mainMenuBtn2"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -50,6 +71,12 @@
         android:text="@string/mainMenuBtn2" />
 
     <Button
+        android:fontFamily="@font/font_jap"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_basic"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@+id/mainMenuBtn2"
@@ -57,10 +84,30 @@
         android:text="@string/mainMenuBtn3" />
 
     <Button
+        android:fontFamily="@font/font_jap"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainMenuBtn3"
         android:id="@+id/mainMenuBtn4"
         android:text="@string/mainMenuBtn4"/>
+
+    <ImageView
+        android:id="@+id/menuImage1"
+        android:layout_below="@+id/mainMenuBtn4"
+        android:src="@drawable/hira_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_toRightOf="@id/menuImage1"
+        android:layout_below="@+id/mainMenuBtn4"
+        android:src="@drawable/menu_image1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>

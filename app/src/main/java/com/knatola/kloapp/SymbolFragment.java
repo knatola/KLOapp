@@ -37,19 +37,6 @@ public class SymbolFragment extends android.support.v4.app.Fragment{
             symbols = args.getParcelableArrayList("symbolsList");
         }
 
-       /* Symbol symbol = new Symbol("ka","か" );
-        Symbol symbol1 = new Symbol("ki","き");
-        Symbol symbol2 = new Symbol("ku", "く");
-        Symbol symbol3 = new Symbol("ke", "け");
-        Symbol symbol4 = new Symbol("ko", "こ");
-
-        final ArrayList<Symbol> symbols = new ArrayList<>();
-        symbols.add(symbol);
-        symbols.add(symbol1);
-        symbols.add(symbol2);
-        symbols.add(symbol3);
-        symbols.add(symbol4);*/
-
         ListView symbolsListView = rootView.findViewById(R.id.symbolsList);
 
         SymbolListAdapter mAdapter = new SymbolListAdapter(getActivity(), R.layout.hirasymbol_list_row,

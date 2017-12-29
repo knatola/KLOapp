@@ -185,9 +185,7 @@ public class GameTwoFragment extends Fragment{
     }
 
     public Symbol randomSymbolAnswer(ArrayList<Symbol> symbols){
-
         Symbol symbol = symbols.get(mQuestionCount - 1);
-
         return symbol;
     }
 
@@ -198,7 +196,6 @@ public class GameTwoFragment extends Fragment{
                 mQuestionCount++;
                 mPointView.setText("Points: " + Integer.toString(mScoreCount));
                 mQuestionView.setText("Question: " + Integer.toString(mQuestionCount));
-                //mQuestion.setPic(randomSymbolAnswer(mGameSymbols).getPic());
                 setmQuestion(randomSymbolAnswer(mGameSymbols));
                 changeQuestions(getmQuestion());
             } else{
@@ -228,6 +225,7 @@ public class GameTwoFragment extends Fragment{
         endFragment.setArguments(bundle);
         transaction.replace(R.id.gameFragmentContainer, endFragment, "endFragment");
         transaction.commit();
+        ((GameActivity)getActivity()).setHeader("Score Screen");
         getFragmentManager().beginTransaction().remove(GameTwoFragment.this).commit();
     }
 

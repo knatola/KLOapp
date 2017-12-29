@@ -30,6 +30,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/symbolMenuHeader"
+                android:layout_marginStart="50dp"
+                android:layout_width="wrap_content"
+                android:text="@string/symbols_info_header"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#fdfefe"
+                android:layout_height="wrap_content" />
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/backGroundMain"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/baseGame">
@@ -26,12 +27,11 @@
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
+        <Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:backgroundTint="@color/colorPrimary">
 
@@ -44,10 +44,19 @@
                 android:scaleY="1.5"
                 android:src="@drawable/back_white" />
 
-        </android.support.v7.widget.Toolbar>
+            <TextView
+                android:fontFamily="@font/font_jap"
+                android:id="@+id/game_header"
+                android:layout_marginStart="50dp"
+                android:layout_width="wrap_content"
+                android:text="@string/gameMenu"
+                android:textSize="30sp"
+                android:textColor="@color/whiteMain"
+                android:layout_height="wrap_content" />
+
+        </Toolbar>
 
     </android.support.design.widget.AppBarLayout>
-
 
     <!--Layout for the buttons, which will be hidden at game start-->
     <RelativeLayout
@@ -56,30 +65,53 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/game1Btn"
+            android:fontFamily="@font/font_jap"
+            android:textSize="30sp"
+            android:background="@drawable/button_basic"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/gameMenuBtn1" />
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="80dp"
+            android:text="@string/gameMenuBtn1"
+            android:id="@+id/game1Btn"
+            android:layout_marginTop="100dp"/>
 
         <Button
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font_jap"
+            android:textSize="30sp"
+            android:background="@drawable/button_basic"
             android:id="@+id/game2Btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_below="@+id/game1Btn"
             android:text="@string/gameMenuBtn2" />
 
         <Button
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font_jap"
+            android:textSize="30sp"
+            android:background="@drawable/button_basic"
             android:id="@+id/game3Btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_below="@+id/game2Btn"
             android:text="@string/gameMenuBtn3" />
 
         <Button
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/font_jap"
+            android:textSize="30sp"
+            android:background="@drawable/button_basic"
             android:id="@+id/game4Btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_below="@+id/game3Btn"
             android:text="@string/gameMenuBtn4" />
 
