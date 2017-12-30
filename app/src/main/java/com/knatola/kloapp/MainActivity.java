@@ -14,7 +14,9 @@ import com.knatola.kloapp.Game.GameActivity;
 import com.knatola.kloapp.Symbol.Symbol;
 
 import java.util.ArrayList;
-
+/*
+*Main Menu activity. Example Symbols are hardcoded here.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Hard coded Example Hirakana symbol List
+        //Hardcoded Example Hirakana symbol List
         Symbol symbol = new Symbol("ka","か");
         Symbol symbol1 = new Symbol("ki","き");
         Symbol symbol2 = new Symbol("ku", "く");
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 
+        //Button listeners
         mainMenuBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //onBackPressed Overridden to take user to Phone home screen.
     @Override
     public void onBackPressed(){
         Intent a = new Intent(Intent.ACTION_MAIN);
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(a);
     }
 
+    //Toolbar menu inflation with main_menu.xml
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);

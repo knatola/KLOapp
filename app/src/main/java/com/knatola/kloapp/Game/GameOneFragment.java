@@ -33,10 +33,13 @@ public class GameOneFragment extends Fragment{
     private ArrayList<Symbol> mGameSymbols;
     private Button mOkBtn;
     private EditText mInput;
-    private int mQuestionCount = 0;
+    private int mQuestionCount = 1;
     private int mMaxQuestionCount;
     private int mPointCount = 0;
     private TextView mQuestionSymbol;
+    private TextView mQuestionCountText;
+    private TextView mScoreCountText;
+
 
     @Nullable
     @Override
@@ -45,6 +48,8 @@ public class GameOneFragment extends Fragment{
         mOkBtn = rootView.findViewById(R.id.okBtn);
         mInput = rootView.findViewById(R.id.answerInput);
         mQuestionSymbol = rootView.findViewById(R.id.symbolImage);
+        mQuestionCountText = rootView.findViewById(R.id.questions_text1);
+        mScoreCountText = rootView.findViewById(R.id.points_text1);
         Bundle args = getArguments();
 
         if (args != null) {
@@ -53,6 +58,8 @@ public class GameOneFragment extends Fragment{
             Log.d(LOG, "questions: "+ mMaxQuestionCount);
         }
 
+        mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
+        mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
         mOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +74,10 @@ public class GameOneFragment extends Fragment{
                     Snackbar wrongAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Wrong answer.", Snackbar.LENGTH_LONG);
                     wrongAnswer.show();
                     mInput.setText("");
+                    mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
+                    mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
 
-                    if(mQuestionCount + 1 < mMaxQuestionCount){
+                    if(mQuestionCount  < mMaxQuestionCount){
                         mQuestionCount++;
                         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
                     }else{
@@ -78,17 +87,16 @@ public class GameOneFragment extends Fragment{
                 } else {
                     Snackbar rightAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Right answer!", Snackbar.LENGTH_LONG);
                     rightAnswer.show();
-                    if(mQuestionCount + 1 < mMaxQuestionCount ) {
+                    if(mQuestionCount  < mMaxQuestionCount ) {
                         mQuestionCount++;
                         mPointCount++;
+                        mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
+                        mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
                         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
                     }else{
                         moveToGameEnd();
                     }
                 }
-
-
-
             }
         });
 

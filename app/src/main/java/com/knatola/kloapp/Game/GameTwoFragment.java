@@ -15,15 +15,25 @@ import android.widget.TextView;
 import com.knatola.kloapp.R;
 import com.knatola.kloapp.Symbol.Symbol;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
+
 
 /**
  * Created by OMISTAJA on 24.11.2017.
+ */
+
+/*
+* Example symbols are passed in ArrayList from MainActivity.
+* Game has 4 buttons and 1 asked japanese symbol.
+* The right symbol name is added to random of the 4 buttons and
+* 3 other random (wrong) names are added to the other buttons.
+* All buttons will have different names, so there aren't duplicates.
+*
+* The "game" shuffles the passed ArrayList and asks all of the symbols in it.
+* This way no symbol is asked twice and the order of symbols are pseudorandom.
+*
  */
 
 public class GameTwoFragment extends Fragment{
@@ -39,7 +49,7 @@ public class GameTwoFragment extends Fragment{
     private TextView mQuestionPic;
     private Symbol mQuestion;
     private int mScoreCount = 0;
-    private int mQuestionCount = 1;
+    private int mQuestionCount = 1; //first question is 1.
     private int mMaxQuestionCount;
     private TextView mPointView;
     private TextView mQuestionView;
@@ -48,6 +58,8 @@ public class GameTwoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView =  inflater.inflate(R.layout.game_two_layout, container, false);
+
+        //UI elements init
         mButton1 = rootView.findViewById(R.id.answerBtn1);
         mButton2 = rootView.findViewById(R.id.answerBtn2);
         mButton3 = rootView.findViewById(R.id.answerBtn3);
@@ -56,14 +68,13 @@ public class GameTwoFragment extends Fragment{
         mPointView = rootView.findViewById(R.id.points);
         mQuestionView = rootView.findViewById(R.id.questions);
 
-
+        /*
+        Check if there are passed arguments to the Activity.
+         */
         Bundle args = getArguments();
-
         if (args != null) {
             mGameSymbols = args.getParcelableArrayList("gameSymbols");
             Collections.shuffle(mGameSymbols);
-            //mQuestion = randomSymbolAnswer(mGameSymbols);
-            // mQuestion.setPic(randomSymbolAnswer(mGameSymbols).getPic());
             mQuestion = mGameSymbols.get(mQuestionCount - 1);
             mMaxQuestionCount = mGameSymbols.size();
         }
@@ -71,7 +82,7 @@ public class GameTwoFragment extends Fragment{
         mQuestionPic.setText(mQuestion.getPic());
         changeQuestions(mQuestion);
         mPointView.setText("Points: " + Integer.toString(mScoreCount));
-        mQuestionView.setText("Questions: " + Integer.toString(mQuestionCount));
+        mQuestionView.setText("Question: " + Integer.toString(mQuestionCount));
 
         //String testList = randomSymbolTexts(mGameSymbols, randomSymbolText(mGameSymbols));
 
@@ -105,12 +116,21 @@ public class GameTwoFragment extends Fragment{
         return rootView;
     }
 
-    //method to change the questions, maybe this could be made more efficiently (?)
+    /*
+    Method to change the questions. Takes the asked symbol as an argument.
+    the random button, where the right answer will be added is selected pseudorandomly
+    with java.util.random.
+
+    Maybe not optimal, but it works.
+     */
+
     public void changeQuestions(Symbol symbol){
         String answerPic = symbol.getPic();
         String answerTavu = symbol.getName();
         int i = rng.nextInt(3);
         String [] apuLista = randomSymbolTexts(mGameSymbols, answerTavu);
+
+        //Debug logger
         Log.d(LOG, "the right case is " + i);
         mQuestionPic.setText(answerPic.toLowerCase());
 
@@ -146,8 +166,14 @@ public class GameTwoFragment extends Fragment{
     }
 
     /*
-    *maybe not optimal, but it works.
-    * Returns 3 random "wrong answers", with 1 right answer
+
+    Returns 3 random "wrong answers", with 1 right answer.
+    Point is that the 3 random wrong answers can't have duplicates and they can't
+    be same as the answer.
+    Takes Symbol ArrayList and the right answer String as args.
+    Returns a String Array[4], where the [0] element is the right answer.
+
+    Maybe not optimal, but it works.
      */
     public String [] randomSymbolTexts(ArrayList<Symbol> symbols, String answer){
 
@@ -177,6 +203,10 @@ public class GameTwoFragment extends Fragment{
             return apu;
     }
 
+    /*
+    Returns pseudorandomly a symbols name.
+    Takes an ArrayList<Symbol> as arg.
+     */
     public String randomSymbolText(ArrayList<Symbol> symbols){
         int i = rng.nextInt(symbols.size());
         Symbol symbol = symbols.get(i);
@@ -184,11 +214,18 @@ public class GameTwoFragment extends Fragment{
         return symbol.getName();
     }
 
+    // Helper method
     public Symbol randomSymbolAnswer(ArrayList<Symbol> symbols){
         Symbol symbol = symbols.get(mQuestionCount - 1);
         return symbol;
     }
 
+    /*
+    Method to test if pressed button has the right answer.
+    Pressed Button is passed as arg.
+
+    After mMaxQuestionCount is done, moveToGameEnd() is called.
+     */
     public void testRightButton(Button btn){
         if(btn.getText().toString().equals(mQuestion.getName())){
             if(mQuestionCount < mMaxQuestionCount){
@@ -217,6 +254,10 @@ public class GameTwoFragment extends Fragment{
         }
     }
 
+    /*
+    Method to change to score screen/game end screen.
+    Score count is passed.
+     */
     public void moveToGameEnd(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();

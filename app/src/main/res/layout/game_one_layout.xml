@@ -35,13 +35,40 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <View android:id="@+id/fakeView1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"/>
+
     <TextView
-        android:textSize="250sp"
+        android:layout_marginTop="40dp"
+        android:textSize="300sp"
         android:id="@+id/symbolImage"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/whiteMain"
+        android:id="@+id/points_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_alignStart="@+id/fakeView1"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/screenBottom"/>
+
+    <TextView
+        android:textColor="@color/whiteMain"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/questions_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_alignEnd="@+id/fakeView1"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_above="@+id/screenBottom" />
 
     <RelativeLayout
         android:layout_marginBottom="@dimen/snackbar_margin"
@@ -59,10 +86,12 @@
             android:layout_marginBottom="@dimen/fab_margin">
 
             <TextView
+                android:fontFamily="@font/font_jap"
+                android:textColor="@color/whiteMain"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="Give Your Answer:"/>
+                android:text="Answer:"/>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -71,10 +100,13 @@
                 android:layout_weight="1"/>
 
             <Button
+                android:fontFamily="@font/font_jap"
+                android:textSize="20sp"
+                android:background="@drawable/button_basic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/okBtn"
-                android:text="OK"
+                android:text="@string/action_ok"
                 android:layout_weight="0.01"/>
 
         </LinearLayout>

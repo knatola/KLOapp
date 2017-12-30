@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backGroundMain"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -26,7 +27,9 @@
     </android.support.design.widget.AppBarLayout>
 
     <TextView
-
+        android:textColor="@color/whiteMain"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/point_text"
         android:layout_marginTop="150dp"
         android:layout_width="wrap_content"
@@ -34,28 +37,41 @@
         android:text="@string/endPoints"/>
 
     <TextView
+        android:textColor="@color/whiteMain"
+        android:textSize="30sp"
+        android:layout_below="@+id/point_text"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="150dp"
+        android:layout_margin="15dp"
         android:id="@+id/score_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:layout_marginTop="230dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/font_jap"
+        android:background="@drawable/button_basic"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/score_count"
         android:text="@string/gameMenu"
         android:layout_centerHorizontal="true"
         android:id="@+id/toGameMenuBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="80dp" />
 
     <Button
+        android:textSize="30sp"
+        android:fontFamily="@font/font_jap"
+        android:layout_marginStart="20dp"
+        android:layout_height="80dp"
+        android:background="@drawable/button_basic"
         android:id="@+id/toMainMenuBtn"
         android:layout_marginTop="10dp"
-        android:text="@string/mainMenu"
+        android:text="@string/mainMenu1"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/toGameMenuBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+         />
 
 </RelativeLayout>

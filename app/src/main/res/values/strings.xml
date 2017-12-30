@@ -14,11 +14,13 @@
     <string name="endPoints">Your points:</string>
     <string name="gameMenu">Game Menu</string>
     <string name="mainMenu">Hira &amp; Kata 学</string>
+    <string name="mainMenu1">Main Menu</string>
     <string name="points">points:</string>
     <string name="question">question:</string>
     <string name="tapPicture">Tap the picture</string>
     <string name="symbols_header">Symbols</string>
     <string name="symbols_info_header">Symbol info</string>
+    <string name="action_ok">OK</string>
 
 
 </resources>

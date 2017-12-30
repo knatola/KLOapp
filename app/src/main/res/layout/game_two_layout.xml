@@ -35,23 +35,27 @@
     </android.support.design.widget.AppBarLayout>
 
     <TextView
-        android:textSize="200sp"
+        android:layout_marginTop="90dp"
+        android:textSize="250sp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/questionImage" />
 
     <TextView
+        android:textColor="@color/whiteMain"
         android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:layout_alignStart="@+id/fakeView"
         android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginBottom="10dp"
         android:layout_above="@+id/answerBtnLayout"/>
 
     <TextView
+        android:textColor="@color/whiteMain"
+        android:layout_marginBottom="10dp"
         android:id="@+id/questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,6 +69,7 @@
         android:layout_height="0dp"
         android:layout_centerInParent="true"/>
 
+    <!-- LinearLayout that "wraps the answer buttons-->
     <LinearLayout
         android:layout_marginBottom="@dimen/snackbar_margin"
         android:id="@+id/answerBtnLayout"
@@ -80,12 +85,14 @@
              android:layout_weight="1">
 
                 <Button
+                    android:background="@drawable/button_basic"
                     android:id="@+id/answerBtn1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     />
                 <Button
+                    android:background="@drawable/button_basic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/answerBtn2"
@@ -101,6 +108,7 @@
                 android:layout_weight="1">
 
                 <Button
+                    android:background="@drawable/button_basic"
                     android:id="@+id/answerBtn3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -108,6 +116,7 @@
                     />
 
                 <Button
+                    android:background="@drawable/button_basic"
                     android:id="@+id/answerBtn4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

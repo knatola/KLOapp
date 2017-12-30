@@ -41,7 +41,7 @@ public class SymbolMenu extends AppCompatActivity{
     private android.support.v7.widget.Toolbar mToolbar;
     private TextView mTitle;
     private static final String KATAKANA = "Katakana";
-    private static final String HIRAKANA = "Hirakana";
+    private static final String HIRAKANA = "Hiragana";
     private boolean mRemember = false;
 
     @Override
@@ -149,7 +149,7 @@ public class SymbolMenu extends AppCompatActivity{
         MenuItem symbolsKatakana = menu.findItem(R.id.action_symbols_katakana);
         MenuItem symbolsHirakana = menu.findItem(R.id.action_symbols_hirakana);
 
-        if(type.equals("Hirakana")){
+        if(type.equals("Hiragana")){
             symbolsHirakana.setVisible(false);
         }else{
             symbolsKatakana.setVisible(false);
