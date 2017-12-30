@@ -84,15 +84,12 @@ public class GameTwoFragment extends Fragment{
         mPointView.setText("Points: " + Integer.toString(mScoreCount));
         mQuestionView.setText("Question: " + Integer.toString(mQuestionCount));
 
-        //String testList = randomSymbolTexts(mGameSymbols, randomSymbolText(mGameSymbols));
-
         mButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 testRightButton(mButton1);
             }
         });
-
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +102,6 @@ public class GameTwoFragment extends Fragment{
                 testRightButton(mButton3);
             }
         });
-
         mButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +116,6 @@ public class GameTwoFragment extends Fragment{
     Method to change the questions. Takes the asked symbol as an argument.
     the random button, where the right answer will be added is selected pseudorandomly
     with java.util.random.
-
     Maybe not optimal, but it works.
      */
 
@@ -166,11 +161,10 @@ public class GameTwoFragment extends Fragment{
     }
 
     /*
-
+    Takes Symbol ArrayList and the right answer String as args.
     Returns 3 random "wrong answers", with 1 right answer.
     Point is that the 3 random wrong answers can't have duplicates and they can't
     be same as the answer.
-    Takes Symbol ArrayList and the right answer String as args.
     Returns a String Array[4], where the [0] element is the right answer.
 
     Maybe not optimal, but it works.
@@ -181,12 +175,11 @@ public class GameTwoFragment extends Fragment{
             apu[0] = answer;
 
             apu[1] = randomSymbolText(symbols);
-
             while (apu[1].equals(answer)) {
                 apu[1] = randomSymbolText(symbols);
             }
-            apu[2] = randomSymbolText(symbols);
 
+            apu[2] = randomSymbolText(symbols);
             while (apu[2].equals(answer) || apu[2].equals(apu[1])) {
                 apu[2] = randomSymbolText(symbols);
             }

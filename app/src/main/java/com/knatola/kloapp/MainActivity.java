@@ -8,16 +8,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import com.knatola.kloapp.Game.GameActivity;
 import com.knatola.kloapp.Symbol.Symbol;
+import com.knatola.kloapp.SymbolsMenu.SymbolMenu;
 
 import java.util.ArrayList;
+
 /*
 *Main Menu activity. Example Symbols are hardcoded here.
  */
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG = "Main menu:";
@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //menu click listeners
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();

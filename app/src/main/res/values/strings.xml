@@ -15,12 +15,31 @@
     <string name="gameMenu">Game Menu</string>
     <string name="mainMenu">Hira &amp; Kata 学</string>
     <string name="mainMenu1">Main Menu</string>
-    <string name="points">points:</string>
-    <string name="question">question:</string>
     <string name="tapPicture">Tap the picture</string>
     <string name="symbols_header">Symbols</string>
     <string name="symbols_info_header">Symbol info</string>
     <string name="action_ok">OK</string>
+    <string name="game1_header">Game 1</string>
+    <string name="game2_header">Game 2</string>
+
+    <string name="symbols_help">
+        Symbols näkymissä pelaaja voi tarkastella valitsemansa tavukirjaston tavuja tarkemmin.
+        Tavut on jaoteltu alkukirjaimensa mukaisesti. Tavujen merkitykset on kirjoitettu tavun
+        viereen ja käyttäjä voi tarkastella tavun oikein piirtämistä painamalla haluamaansa tavua.
+        Käyttäjälle kerrotaan myös vetojen määrä eli kuinka monta vetoa tarvitaan tavun piirtämiseen.
+    </string>
+
+    <string name="game1_help">
+        Molempien tavukirjastojen pelit ovat samanlaiset. Hiragana/Katakana Game 1.
+        pelaaja saa eteensä valitsemansa tavukirjaston tavun.
+        Tämän jälkeen pelaaja kirjoittaa esitetyn tavun merkityksen. Pelissä on kymmenen kysymystä.
+    </string>
+
+    <string name="game2_help">
+        Hiragana/Katakana Game 2. pelaaja saa eteensä valitsemansa tavukirjaston tavun.
+        Tässä pelissä puolestaan pelaaja valitsee neljästä eri vaihtoehdosta oikean
+        merkityksen esitetylle tavulle.
+    </string>
 
 
 </resources>

@@ -23,8 +23,14 @@ import com.knatola.kloapp.Symbol.Symbol;
 import java.util.ArrayList;
 
 /**
- * Created by OMISTAJA on 24.11.2017.
+ * Created by knatola on 24.11.2017.
  */
+
+/*
+Fragment for the first game/quiz.
+mMaxQuestionCount is set from the passed symbolList
+ */
+
 
 public class GameOneFragment extends Fragment{
 
@@ -50,8 +56,9 @@ public class GameOneFragment extends Fragment{
         mQuestionSymbol = rootView.findViewById(R.id.symbolImage);
         mQuestionCountText = rootView.findViewById(R.id.questions_text1);
         mScoreCountText = rootView.findViewById(R.id.points_text1);
-        Bundle args = getArguments();
 
+        //check args
+        Bundle args = getArguments();
         if (args != null) {
             mGameSymbols = args.getParcelableArrayList("gameSymbols");
             mMaxQuestionCount = mGameSymbols.size();
@@ -61,6 +68,11 @@ public class GameOneFragment extends Fragment{
         mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
         mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
+
+        /*
+        Ok button listener. Checks the given answer. Game doesn't move on until user gives some answer
+        (input field isn't empty). On right answer user gets a point.
+         */
         mOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,11 +86,11 @@ public class GameOneFragment extends Fragment{
                     Snackbar wrongAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Wrong answer.", Snackbar.LENGTH_LONG);
                     wrongAnswer.show();
                     mInput.setText("");
+                    mQuestionCount++;
                     mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
                     mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
 
                     if(mQuestionCount  < mMaxQuestionCount){
-                        mQuestionCount++;
                         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
                     }else{
                         Log.d(LOG,"tying to start endGameFragment");
@@ -87,11 +99,11 @@ public class GameOneFragment extends Fragment{
                 } else {
                     Snackbar rightAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Right answer!", Snackbar.LENGTH_LONG);
                     rightAnswer.show();
-                    if(mQuestionCount  < mMaxQuestionCount ) {
-                        mQuestionCount++;
-                        mPointCount++;
-                        mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
-                        mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
+                    mQuestionCount++;
+                    mPointCount++;
+                    mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
+                    mQuestionCountText.setText("Question: " + Integer.toString(mQuestionCount));
+                    if(mQuestionCount < mMaxQuestionCount ) {
                         mQuestionSymbol.setText(mGameSymbols.get(mQuestionCount).getPic());
                     }else{
                         moveToGameEnd();
@@ -103,6 +115,7 @@ public class GameOneFragment extends Fragment{
         return rootView;
     }
 
+    //helper method to hide the keyboard
     public static void hideKeyboard(Context mContext) {
         InputMethodManager imm = (InputMethodManager) mContext
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -110,6 +123,7 @@ public class GameOneFragment extends Fragment{
                 .getCurrentFocus().getWindowToken(), 0);
     }
 
+    //Helper method to move to the game end screen, points are passed in bundle.
     public void moveToGameEnd(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();

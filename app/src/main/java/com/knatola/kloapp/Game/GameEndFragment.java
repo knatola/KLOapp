@@ -1,10 +1,8 @@
 package com.knatola.kloapp.Game;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,9 @@ import com.knatola.kloapp.R;
  * Created by OMISTAJA on 24.11.2017.
  */
 
+/*
+Reusable Fragment for the game end screen. Points are passed from a game.
+ */
 public class GameEndFragment extends android.support.v4.app.Fragment {
 
     private static View rootView;

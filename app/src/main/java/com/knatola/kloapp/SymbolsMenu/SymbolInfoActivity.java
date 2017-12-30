@@ -1,4 +1,4 @@
-package com.knatola.kloapp;
+package com.knatola.kloapp.SymbolsMenu;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.knatola.kloapp.R;
 import com.knatola.kloapp.Symbol.Symbol;
 
 /**
- * Created by juho on 12/28/17.
+ * Created by knatola on 12/28/17.
  */
 
+/*
+Clicked symbol is passed to this activity.
+ */
 public class SymbolInfoActivity extends AppCompatActivity {
 
     private Symbol mSymbol;
@@ -27,19 +31,20 @@ public class SymbolInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.symbol_info_layout);
 
+        //check passed bundle
         Bundle bundle = getIntent().getExtras();
         if(bundle != null)
             mSymbol = bundle.getParcelable("symbol");
 
+        //UI elements init
         mBackBtn = findViewById(R.id.symbolInfoBack);
         mImgBtn = findViewById(R.id.symbolImgBtn);
         mSymbolName = findViewById(R.id.symbolNameTxt);
         mSymbolTavu = findViewById(R.id.symbolTavuTxt);
-
         mSymbolName.setText(mSymbol.getName());
         mSymbolTavu.setText(mSymbol.getPic());
 
-        //Stupid hard coded example
+        //Very Stupid hardcoding just for example
         switch(mSymbol.getName()){
             case "ka":
                 mImgBtn.setImageResource(R.drawable.ka21);

@@ -1,22 +1,15 @@
 package com.knatola.kloapp.Game;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -25,31 +18,23 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.knatola.kloapp.HelpActivity;
-import com.knatola.kloapp.MainActivity;
 import com.knatola.kloapp.R;
 import com.knatola.kloapp.Symbol.Symbol;
-import com.knatola.kloapp.SymbolFragment;
-import com.knatola.kloapp.SymbolMenu;
-
-import org.w3c.dom.Text;
+import com.knatola.kloapp.SymbolsMenu.SymbolMenu;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by knatola on 23.11.2017.
  */
 
 /*
- need to make :
- - adapter for game fragments
- - game fragments
- - game end fragment
- -
+Base activity of the game.
+Fragments are constructed for games 1 and 2 into a container.
  */
-public class GameActivity extends FragmentActivity {
+public class GameActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
+    private android.support.v7.widget.Toolbar mToolbar;
     private static final int ITEMS = 4;
     private int score = 0;
     private Button btn1;
@@ -75,9 +60,10 @@ public class GameActivity extends FragmentActivity {
         Log.d(LOG, "Activity started");
         setContentView(R.layout.game_menu_layout);
         mGameHeader = findViewById(R.id.game_header);
-        mGameBundle = getIntent().getExtras();
         mSymbolsList3 = new ArrayList<>();
 
+        //check args
+        mGameBundle = getIntent().getExtras();
         if(mGameBundle != null) {
             mSymbolsList = mGameBundle.getParcelableArrayList("symbols");
             mSymbolsList2 = mGameBundle.getParcelableArrayList("symbols1");
@@ -87,22 +73,19 @@ public class GameActivity extends FragmentActivity {
 
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("");
-        //mToolbar.setT
-        setActionBar(mToolbar);
+        setSupportActionBar(mToolbar);
 
         if (findViewById(R.id.gameFragmentContainer) != null) {
             if (savedInstanceState != null) {
                 return;
             }
         }
-
         mBackBtn = findViewById(R.id.gameMenuBack);
         mBtnLayout = findViewById(R.id.buttonLayout);
         mFragmentContainer = findViewById(R.id.gameFragmentContainer);
 
-
         /*
-        * Buttons set up
+        * Buttons setup
          */
         btn1 = findViewById(R.id.game1Btn);
         btn2 = findViewById(R.id.game2Btn);
@@ -193,6 +176,7 @@ public class GameActivity extends FragmentActivity {
         setBtnLayout(1);
     }
 
+    //Toolbar OptionsMenu init
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -200,6 +184,7 @@ public class GameActivity extends FragmentActivity {
         return true;
     }
 
+    //OptionsMenu click Listener
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -223,7 +208,6 @@ public class GameActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Method to change the toolbar title of Activity
     public void setHeader(String header){
         mGameHeader.setText(header);
     }

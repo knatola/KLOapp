@@ -1,7 +1,6 @@
-package com.knatola.kloapp;
+package com.knatola.kloapp.SymbolsMenu;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,22 +13,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.knatola.kloapp.HelpActivity;
 import com.knatola.kloapp.R;
 import com.knatola.kloapp.Symbol.Symbol;
-import com.knatola.kloapp.SymbolFragment;
 
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 /**
  * Created by knatola on 20.11.2017.
  */
-
+/*
+SymbolMenu base activity.
+SymbolFragments are created as tabs.
+ */
 public class SymbolMenu extends AppCompatActivity{
 
     private FragmentsAdapter mFragmentsAdapter;
@@ -95,10 +94,8 @@ public class SymbolMenu extends AppCompatActivity{
 
             switch (position){
                 case 0:
-                    //SymbolFragment tab1 = new SymbolFragment();
                     return getSymbols(position);
                 case 1:
-                    //SymbolFragment tab2 = new SymbolFragment();
                     return getSymbols(position);
                 default:
                     return null;
@@ -118,8 +115,6 @@ public class SymbolMenu extends AppCompatActivity{
                     return "K";
                 case 1:
                     return "S";
-
-
             }
             return null;
         }
@@ -134,8 +129,6 @@ public class SymbolMenu extends AppCompatActivity{
             }else{
                 symbolsBundle.putParcelableArrayList("symbolsList", mSymbolsList1);
             }
-            // need a way to return symbolsList here
-
 
             symbolFragment.setArguments(symbolsBundle);
             return symbolFragment;
@@ -145,7 +138,6 @@ public class SymbolMenu extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem help =  menu.findItem(R.id.action_help);
         MenuItem symbolsKatakana = menu.findItem(R.id.action_symbols_katakana);
         MenuItem symbolsHirakana = menu.findItem(R.id.action_symbols_hirakana);
 
