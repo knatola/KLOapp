@@ -57,6 +57,9 @@ public class GameOneFragment extends Fragment{
         mQuestionCountText = rootView.findViewById(R.id.questions_text1);
         mScoreCountText = rootView.findViewById(R.id.points_text1);
 
+        //This prevents app from a crash
+        mInput.setText("");
+
         //check args
         Bundle args = getArguments();
         if (args != null) {
@@ -99,6 +102,7 @@ public class GameOneFragment extends Fragment{
                 } else {
                     Snackbar rightAnswer = Snackbar.make(getActivity().findViewById(R.id.baseGame), "Right answer!", Snackbar.LENGTH_LONG);
                     rightAnswer.show();
+                    mInput.setText("");
                     mQuestionCount++;
                     mPointCount++;
                     mScoreCountText.setText("Points: " + Integer.toString(mPointCount));
@@ -119,8 +123,15 @@ public class GameOneFragment extends Fragment{
     public static void hideKeyboard(Context mContext) {
         InputMethodManager imm = (InputMethodManager) mContext
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
+        try{
+            imm.hideSoftInputFromWindow(((Activity) mContext).getWindow()
+                    .getCurrentFocus().getWindowToken(), 0);
+        }catch(NullPointerException e){
+            Log.d(LOG, "nullpointer");
+        }
+        /*if(((Activity) mContext).getWindow().getCurrentFocus().getWindowToken() != null)
         imm.hideSoftInputFromWindow(((Activity) mContext).getWindow()
-                .getCurrentFocus().getWindowToken(), 0);
+                .getCurrentFocus().getWindowToken(), 0);*/
     }
 
     //Helper method to move to the game end screen, points are passed in bundle.
